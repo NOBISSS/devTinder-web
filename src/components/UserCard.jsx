@@ -12,7 +12,7 @@ const UserCard = ({user}) => {
   </figure>
   <div className="card-body flex flex-col gap-5 capitalize">
     <h2 className="card-title">{firstName + " " + lastName}</h2>
-    {age && gender && <h1 className='bg-'>{age + ", "+gender}</h1>}
+    {age && gender && <h1 className='bg-'>{age + " , "+gender}</h1>}
     <h1 className='bg-red-500 h-2'>{about}</h1>
     <div className="card-actions justify-center mt-5">
       <button className="btn btn-primary">Interested</button>
