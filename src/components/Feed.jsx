@@ -21,11 +21,6 @@ const Feed = () => {
   useEffect(()=>{getFeed()},[]);
   return feed && (
     <div className='flex justify-center my-10 flex-wrap'>
-      {/* {
-      feed.user.map((user)=>(
-        <UserCard user={user}/>
-      ))
-    } */}
       <UserCard user={feed.user[feed.user.length-1]}/>
     </div>
   )
