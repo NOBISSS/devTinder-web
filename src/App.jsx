@@ -6,7 +6,7 @@ import { Provider } from "react-redux"
 import appStore from "./utils/appStore"
 import Profile from "./components/Profile"
 import Feed from "./components/Feed"
-
+import { ToastContainer,toast } from "react-toastify"
 function App() {
   return (
     <>
@@ -22,6 +22,7 @@ function App() {
       
     </BrowserRouter>
     </Provider>
+    <ToastContainer/>
     </>
   )
 }

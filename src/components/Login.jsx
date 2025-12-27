@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../utils/constants';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const [emailId,setEmailId]=useState("henry123@gmail.com");
     const [password,setPassword]=useState("Henry@123");
-    const [error,setError]=useState("");
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const handleLogin=async()=>{
@@ -22,8 +22,10 @@ const Login = () => {
             {withCredentials:true});
             dispatch(addUser(res.data.user));
             navigate("/feed");
+            toast.success("Logged Successfully");
         }catch(error){
-            setError(error?.response?.data?.message || "Something Went Wrong");
+            // setError(error?.response?.data?.message || "Something Went Wrong");
+            toast.error(error?.response?.data?.message || "Something Went Wrong!");
             console.log("ERROR"+error.message);
         }
     }
@@ -46,7 +48,6 @@ const Login = () => {
                             <input type="text" className="input" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                         </fieldset>
                     </div>
-                    <p className='text-red-400' id="LOGIN-ERROR">{error}</p>
                     <div className="card-actions justify-center">
                         <button className="btn btn-primary px-5" onClick={handleLogin}>Login</button>
                     </div>
