@@ -20,7 +20,7 @@ const Feed = () => {
   }
   useEffect(()=>{getFeed()},[]);
   return feed && (
-    <div className='flex justify-center my-10 flex-wrap'>
+    <div className='flex justify-center my-10 bg-red-600 flex-wrap'>
       <UserCard user={feed.user[feed.user.length-1]}/>
     </div>
   )
