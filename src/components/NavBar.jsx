@@ -7,6 +7,10 @@ import { removeUser } from '../utils/userSlice';
 import { removeFeed } from '../utils/feedSlice';
 
 const NavBar = () => {
+  const userPhoto={
+    male:"https://images.unsplash.com/photo-1640952131659-49a06dd90ad2?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    female:"https://images.unsplash.com/photo-1653558368201-cf9d0b2a2c70?q=80&w=956&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  }
   const user=useSelector((store)=>store.user);
   const dispatch=useDispatch();
   const navigate=useNavigate();
@@ -34,8 +38,8 @@ const NavBar = () => {
         <div className="w-10 rounded-full flex">
           
           <img
-            alt="Tailwind CSS Navbar component"
-            src={user.photoUrl} />
+            alt="User Photo"
+            src={user?.photoUrl || (user?.gender === 'male' ? userPhoto.male : userPhoto.female)} />
         </div>
       </div>
       <ul
@@ -44,6 +48,17 @@ const NavBar = () => {
         <li>
           <Link to="/profile" className="justify-between">
             Profile
+            <span className="badge">New</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/connections" className="justify-between">
+            Connections
+          </Link>
+        </li>
+        <li>
+          <Link to="/requests" className="justify-between">
+            Requests
             <span className="badge">New</span>
           </Link>
         </li>
