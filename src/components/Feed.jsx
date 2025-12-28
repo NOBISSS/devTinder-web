@@ -17,7 +17,7 @@ const Feed = () => {
       if(res.data.user.length>0){
       dispatch(addFeed(res.data));
       }else{
-        setMessage("No Cards Found Feed Completed");
+        setMessage("No New Users Found");
       }
     }catch(error){
       console.log("ERROR:"+error.message);

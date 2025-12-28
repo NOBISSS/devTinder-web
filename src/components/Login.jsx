@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { BASE_URL } from '../utils/constants';
 import { toast } from 'react-toastify';
 
@@ -45,11 +45,17 @@ const Login = () => {
                             <div className='label'>
                                 <span className='label-text text-white'>Password</span>
                             </div>
-                            <input type="text" className="input" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                            <input type="password" className="input" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                         </fieldset>
                     </div>
                     <div className="card-actions justify-center">
                         <button className="btn btn-primary px-5" onClick={handleLogin}>Login</button>
+                    </div>
+                    <div className="text-center mt-4">
+                        <span className="text-white">Don't have an account? </span>
+                        <Link to="/signup" className="link link-primary">
+                            Sign up here
+                        </Link>
                     </div>
                 </div>
             </div>
