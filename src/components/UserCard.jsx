@@ -1,7 +1,22 @@
+import axios from 'axios';
 import React from 'react'
-
+import { BASE_URL } from '../utils/constants'
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { removeCard } from '../utils/feedSlice';
 const UserCard = ({ user }) => {
   const { firstName, lastName, photoUrl, age, gender, about } = user;
+  const dispatch=useDispatch();
+  const handleRequest=async(status,userId)=>{
+    try{
+      const res=await axios.post(BASE_URL+`/request/send/${status}/${userId}`,{},{withCredentials:true});
+      console.log("RES::",res);
+      toast.success("Request Sent Successfully");
+      dispatch(removeCard(userId));
+    }catch(error){
+      console.log("Error;:",error);
+    }
+  }
   return (
     <div className="card w-80 bg-base-100 shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
       {/* Image Section */}
@@ -42,14 +57,14 @@ const UserCard = ({ user }) => {
         )}
 
         {/* Action Buttons */}
-        <div className="card-actions justify-center gap-3 mt-2 pb-1">
-          <button className="btn btn-error btn-md px-6 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-200 flex items-center gap-2">
+        <div   className="card-actions justify-center gap-3 mt-2 pb-1">
+          <button onClick={()=>handleRequest("ignored",user._id)} className="btn btn-error btn-md px-6 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-200 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
             Ignore
           </button>
-          <button className="btn btn-primary btn-md px-6 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-200 flex items-center gap-2">
+          <button onClick={()=>handleRequest("interested",user._id)} className="btn btn-primary btn-md px-6 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-200 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
