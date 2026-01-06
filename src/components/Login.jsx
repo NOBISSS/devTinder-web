@@ -7,26 +7,26 @@ import { BASE_URL } from '../utils/constants';
 import { toast } from 'react-toastify';
 
 const Login = () => {
-    const [emailId,setEmailId]=useState("henry123@gmail.com");
-    const [password,setPassword]=useState("Henry@123");
-    const dispatch=useDispatch();
-    const navigate=useNavigate();
-    const handleLogin=async()=>{
-        try{
-            const res=await axios.post(
-                BASE_URL+"/login",
+    const [emailId, setEmailId] = useState("henry123@gmail.com");
+    const [password, setPassword] = useState("Henry@123");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleLogin = async () => {
+        try {
+            const res = await axios.post(
+                BASE_URL + "/login",
                 {
-                emailId,
-                password
-            },
-            {withCredentials:true});
+                    emailId,
+                    password
+                },
+                { withCredentials: true });
             dispatch(addUser(res.data.user));
             navigate("/feed");
             toast.success("Logged Successfully");
-        }catch(error){
+        } catch (error) {
             // setError(error?.response?.data?.message || "Something Went Wrong");
             toast.error(error?.response?.data?.message || "Something Went Wrong!");
-            console.log("ERROR"+error.message);
+            console.log("ERROR" + error.message);
         }
     }
     return (
@@ -39,13 +39,13 @@ const Login = () => {
                             <div className='label'>
                                 <span className='label-text text-white'>Email ID</span>
                             </div>
-                            <input type="text" className="input" value={emailId} onChange={(e)=>setEmailId(e.target.value)}/>
+                            <input type="text" className="input" value={emailId} onChange={(e) => setEmailId(e.target.value)} />
                         </fieldset>
                         <fieldset className="form-control fieldset w-full max-w-xs py-4">
                             <div className='label'>
                                 <span className='label-text text-white'>Password</span>
                             </div>
-                            <input type="password" className="input" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                            <input type="password" className="input" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </fieldset>
                     </div>
                     <div className="card-actions justify-center">
